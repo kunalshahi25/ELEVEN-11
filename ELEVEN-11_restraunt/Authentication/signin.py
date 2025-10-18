@@ -1,4 +1,5 @@
 import json
+import getpass
 from Validation.validations import admin_staff_ask, note_validation
 from Authentication.signup import SignUp
 from Model.restraunt_model import AdminDashboard
@@ -23,7 +24,7 @@ class SignIn:
                 return
 
             user_name = input(f"Enter {role.capitalize()} Username: ")
-            Pass_word = input(f"Enter {role.capitalize()} Password: ")
+            Pass_word = getpass.getpass(f"Enter {role.capitalize()} Password: ")
 
             found = False
             for record in data:
