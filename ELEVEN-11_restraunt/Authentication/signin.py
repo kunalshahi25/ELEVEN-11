@@ -1,4 +1,5 @@
 import json
+from colorama import Fore
 import getpass
 from Validation.validations import admin_staff_ask, note_validation
 from Authentication.signup import SignUp
@@ -20,7 +21,7 @@ class SignIn:
                 data = json.load(file)
 
             if not data:
-                print("No users found! Please Sign Up first.")
+                print(Fore.RED +"No users found! Please Sign Up first.")
                 return
 
             user_name = input(f"Enter {role.capitalize()} Username: ")
@@ -32,7 +33,7 @@ class SignIn:
                     for person in record[role]:
                         if (person["username"] == user_name and 
                             person["password"] == Pass_word):
-                            print(f"\n {role.capitalize()} Sign In Successful!\n")
+                            print(Fore.GREEN + f"\n {role.capitalize()} Sign In Successful!\n")
                             found = True
                             # this will redirect to the dashboard
                             if role == "admin":
@@ -44,7 +45,7 @@ class SignIn:
                     break
 
             if not found:
-                print("Invalid Username or Password.")
+                print(Fore.RED +"Invalid Username or Password.")
                 return
 
         elif output == 3:

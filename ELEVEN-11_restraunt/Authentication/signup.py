@@ -1,5 +1,6 @@
 import uuid
 import getpass
+from colorama import Fore
 import os
 import sys
 import json
@@ -32,7 +33,7 @@ class SignUp():
             elif more_qualification == "No":
                 break
             else:
-                print("Enter Only \'Yes\' or \'No\'")  
+                print(Fore.GREEN +"Enter Only \'Yes\' or \'No\'")  
           
         qualification_list.append(qualification_dict)
         admin_dict["experience"]=input("Please Enter Your Work Experince: ")
@@ -40,7 +41,7 @@ class SignUp():
         username=input("Please Enter Username: ")
         for i in username:
             if i == '0':
-                print("Username should Not contain Zero.")
+                print(Fore.RED +"Username should Not contain Zero.")
                 exit()
         admin_dict["username"]=username
 
@@ -59,17 +60,18 @@ class SignUp():
                 has_special = True
 
         if has_zero or len(password) < 8:
-            print("Invalid password: should not contain '0' and should not be less than 8 characters.")
+            print(Fore.RED +"Invalid password: should not contain '0' and should not be less than 8 characters.")
             exit()
         elif not has_special:
-            print("Invalid password: must include at least one special character")
+            print(Fore.RED +"Invalid password: must include at least one special character")
             exit()
 
         elif password != confirm_password:
-            print("Passwords do not match! Please try again.")
+            print(Fore.RED +"Passwords do not match! Please try again.")
             return
         else: 
             admin_dict["password"]=password
+            print(Fore.GREEN +"Sign Up Successfull !")
         admin_staff_list.append(admin_dict)
         admin_staff_dict["staff"] =admin_staff_list
         with open(path, "r") as file:
