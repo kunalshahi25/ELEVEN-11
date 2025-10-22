@@ -1,1 +1,135 @@
-[{"itemcode": 1, "name": "Paneer Lababdaar", "half": 90, "full": 170}, {"itemcode": 2, "name": "Butter Paneer", "half": 80, "full": 150}, {"itemcode": 3, "name": "Paneer Do Pyaza", "half": 80, "full": 150}, {"itemcode": 4, "name": "Dal Fry", "half": 70, "full": 140}, {"itemcode": 5, "name": "Dal Makhani", "half": 80, "full": 150}, {"itemcode": 6, "name": "Rajma Fry", "half": 80, "full": 150}, {"itemcode": 7, "name": "Kadi", "half": 70, "full": 140}, {"itemcode": 8, "name": "Rajma Chawal", "half": 80, "full": 150}, {"itemcode": 9, "name": "Aloo Paratha", "half": 50, "full": ""}, {"itemcode": 10, "name": "Kadi Chawal", "half": 80, "full": 150}, {"itemcode": 11, "name": "Egg Curry", "half": 80, "full": 150}, {"itemcode": 12, "name": "Mix Veg", "half": 90, "full": 170}, {"itemcode": 13, "name": "Aalo Jeera", "half": 60, "full": 120}, {"itemcode": 14, "name": "White Sauce Pasta", "half": 100, "full": 190}, {"itemcode": 15, "name": "Red Sauce Pasta", "half": 100, "full": 190}, {"itemcode": 16, "name": "Mix Sauce Pasta", "half": 100, "full": 190}, {"itemcode": 17, "name": "Chaap", "half": 80, "full": 150}, {"itemcode": 18, "name": "Paneer Paratha", "half": 70, "full": ""}, {"itemcode": 19, "name": "Plain Paratha", "half": 40, "full": ""}, {"itemcode": 20, "name": "Aloo Pyaz Paratha", "half": 70, "full": ""}]
+[
+    {
+        "itemcode": 1,
+        "name": "Aloo Paratha",
+        "half": 50,
+        "full": "",
+        "category": "Breakfast"
+    },
+    {
+        "itemcode": 2,
+        "name": "Paneer Paratha",
+        "half": 70,
+        "full": "",
+        "category": "Breakfast"
+    },
+    {
+        "itemcode": 3,
+        "name": "Plain Paratha",
+        "half": 40,
+        "full": "",
+        "category": "Breakfast"
+    },
+    {
+        "itemcode": 4,
+        "name": "Aloo Pyaz Paratha",
+        "half": 70,
+        "full": "",
+        "category": "Breakfast"
+    },
+    {
+        "itemcode": 6,
+        "name": "Dal Makhani",
+        "half": 80,
+        "full": 150,
+        "category": "Lunch"
+    },
+    {
+        "itemcode": 7,
+        "name": "Rajma Chawal",
+        "half": 80,
+        "full": 150,
+        "category": "Lunch"
+    },
+    {
+        "itemcode": 8,
+        "name": "Kadi Chawal",
+        "half": 80,
+        "full": 150,
+        "category": "Lunch"
+    },
+    {
+        "itemcode": 9,
+        "name": "Mix Veg",
+        "half": 90,
+        "full": 170,
+        "category": "Lunch"
+    },
+    {
+        "itemcode": 11,
+        "name": "Paneer Lababdaar",
+        "half": 90,
+        "full": 170,
+        "category": "Dinner"
+    },
+    {
+        "itemcode": 12,
+        "name": "Butter Paneer",
+        "half": 80,
+        "full": 150,
+        "category": "Dinner"
+    },
+    {
+        "itemcode": 13,
+        "name": "Paneer Do Pyaza",
+        "half": 80,
+        "full": 150,
+        "category": "Dinner"
+    },
+    {
+        "itemcode": 14,
+        "name": "Egg Curry",
+        "half": 80,
+        "full": 150,
+        "category": "Dinner"
+    },
+    {
+        "itemcode": 15,
+        "name": "Chaap Fry",
+        "half": 150,
+        "full": 250,
+        "category": "Dinner"
+    },
+    {
+        "itemcode": 16,
+        "name": "White Sauce Pasta",
+        "half": 100,
+        "full": 190,
+        "category": "Starters"
+    },
+    {
+        "itemcode": 17,
+        "name": "Red Sauce Pasta",
+        "half": 100,
+        "full": 190,
+        "category": "Starters"
+    },
+    {
+        "itemcode": 18,
+        "name": "Mix Sauce Pasta",
+        "half": 100,
+        "full": 190,
+        "category": "Starters"
+    },
+    {
+        "itemcode": 19,
+        "name": "Chicken Lollipop",
+        "half": 150,
+        "full": 300,
+        "category": "Starters"
+    },
+    {
+        "itemcode": 5,
+        "name": "Dal Fry",
+        "half": 70,
+        "full": 140,
+        "category": "Lunch"
+    },
+    {
+        "itemcode": 10,
+        "name": "Aloo Jeera",
+        "half": 60,
+        "full": 120,
+        "category": "Lunch"
+    }
+]

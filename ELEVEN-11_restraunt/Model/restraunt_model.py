@@ -1,41 +1,46 @@
 from colorama import Fore, Style, init
 import time
 import json
+import os
+import uuid
+import datetime
 
 init(autoreset=True)
 
 path = r"E:\ELEVEN-11\ELEVEN-11_restraunt\Database\Menu.json"
 
 
-# ==============================
-# CLASS: RestrauntMenu
-# ==============================
 class RestrauntMenu:
     def __init__(self):
+        # Default categorized menu
         self.NewMenuList = [
-            {"itemcode":1,"name":"Paneer Lababdaar","half":90,"full":170},
-            {"itemcode":2,"name":"Butter Paneer","half":80,"full":150},
-            {"itemcode":3,"name":"Paneer Do Pyaza","half":80,"full":150},
-            {"itemcode":4,"name":"Dal Fry","half":70,"full":140},
-            {"itemcode":5,"name":"Dal Makhani","half":80,"full":150},
-            {"itemcode":6,"name":"Rajma Fry","half":80,"full":150},
-            {"itemcode":7,"name":"Kadi","half":70,"full":140},
-            {"itemcode":8,"name":"Rajma Chawal","half":80,"full":150},
-            {"itemcode":9,"name":"Aloo Paratha","half":50,"full":""},
-            {"itemcode":10,"name":"Kadi Chawal","half":80,"full":150},
-            {"itemcode":11,"name":"Egg Curry","half":80,"full":150},
-            {"itemcode":12,"name":"Mix Veg","half":90,"full":170},
-            {"itemcode":13,"name":"Aalo Jeera","half":60,"full":120},
-            {"itemcode":14,"name":"White Sauce Pasta","half":100,"full":190},
-            {"itemcode":15,"name":"Red Sauce Pasta","half":100,"full":190},
-            {"itemcode":16,"name":"Mix Sauce Pasta","half":100,"full":190},
-            {"itemcode":17,"name":"Chaap","half":80,"full":150},
-            {"itemcode":18,"name":"Paneer Paratha","half":70,"full":""},
-            {"itemcode":19,"name":"Plain Paratha","half":40,"full":""},
-            {"itemcode":20,"name":"Aloo Pyaz Paratha","half":70,"full":""}
+            # Breakfast
+            {"itemcode": 1, "name": "Aloo Paratha", "half": 50, "full": "", "category": "Breakfast"},
+            {"itemcode": 2, "name": "Paneer Paratha", "half": 70, "full": "", "category": "Breakfast"},
+            {"itemcode": 3, "name": "Plain Paratha", "half": 40, "full": "", "category": "Breakfast"},
+            {"itemcode": 4, "name": "Aloo Pyaz Paratha", "half": 70, "full": "", "category": "Breakfast"},
+
+            # Lunch
+            {"itemcode": 5, "name": "Dal Fry", "half": 70, "full": 140, "category": "Lunch"},
+            {"itemcode": 6, "name": "Dal Makhani", "half": 80, "full": 150, "category": "Lunch"},
+            {"itemcode": 7, "name": "Rajma Chawal", "half": 80, "full": 150, "category": "Lunch"},
+            {"itemcode": 8, "name": "Kadi Chawal", "half": 80, "full": 150, "category": "Lunch"},
+            {"itemcode": 9, "name": "Mix Veg", "half": 90, "full": 170, "category": "Lunch"},
+            {"itemcode": 10, "name": "Aalo Jeera", "half": 60, "full": 120, "category": "Lunch"},
+
+            # Dinner
+            {"itemcode": 11, "name": "Paneer Lababdaar", "half": 90, "full": 170, "category": "Dinner"},
+            {"itemcode": 12, "name": "Butter Paneer", "half": 80, "full": 150, "category": "Dinner"},
+            {"itemcode": 13, "name": "Paneer Do Pyaza", "half": 80, "full": 150, "category": "Dinner"},
+            {"itemcode": 14, "name": "Egg Curry", "half": 80, "full": 150, "category": "Dinner"},
+            {"itemcode": 15, "name": "Chaap", "half": 80, "full": 150, "category": "Dinner"},
+
+            # Starters
+            {"itemcode": 16, "name": "White Sauce Pasta", "half": 100, "full": 190, "category": "Starters"},
+            {"itemcode": 17, "name": "Red Sauce Pasta", "half": 100, "full": 190, "category": "Starters"},
+            {"itemcode": 18, "name": "Mix Sauce Pasta", "half": 100, "full": 190, "category": "Starters"},
         ]
 
-        # If menu.json is empty, add default items
         try:
             with open(path, "r") as file:
                 content = file.read().strip()
@@ -44,6 +49,7 @@ class RestrauntMenu:
                 else:
                     self.MenuList = self.NewMenuList
                     self.save_menu()
+                    
         except FileNotFoundError:
             self.MenuList = self.NewMenuList
             self.save_menu()
@@ -53,34 +59,50 @@ class RestrauntMenu:
         with open(path, "w") as file:
             json.dump(self.MenuList, file, indent=4)
 
+
     def add_item(self):
-        """Add a new menu item"""
         add_item_dict = {}
         add_item_dict["itemcode"] = int(input("Enter Item Code: "))
         add_item_dict["name"] = input("Enter Item Name: ")
         add_item_dict["half"] = int(input("Enter Half Plate Price: "))
         full_price = input("Enter Full Plate Price (press Enter if not applicable): ")
         add_item_dict["full"] = int(full_price) if full_price else ""
+
+        print("\nSelect Category:")
+        print("1. Breakfast\n2. Lunch\n3. Dinner\n4. Starters")
+        cat_choice = input("Enter choice: ")
+        categories = {"1": "Breakfast", "2": "Lunch", "3": "Dinner", "4": "Starters"}
+        add_item_dict["category"] = categories.get(cat_choice, "Lunch")
+
         self.MenuList.append(add_item_dict)
         self.save_menu()
         print(Fore.GREEN + "Item added successfully!\n")
 
+
     def update_item(self):
-        """Update an existing menu item"""
         item_code = int(input("Enter the Item Code to update: "))
         for item in self.MenuList:
             if item["itemcode"] == item_code:
                 print(Fore.YELLOW + f"Editing {item['name']}...")
                 item["name"] = input("Enter New Name: ") or item["name"]
                 item["half"] = int(input("Enter New Half Price: ") or item["half"])
-                item["full"] = input("Enter New Full Price: ") or item["full"]
+                full_val = input("Enter New Full Price: ") or item["full"]
+                item["full"] = int(full_val) if full_val else item["full"]
+
+                print("\nSelect New Category (press Enter to skip):")
+                print("1. Breakfast\n2. Lunch\n3. Dinner\n4. Starters")
+                cat_choice = input("Enter choice: ")
+                if cat_choice in ["1", "2", "3", "4"]:
+                    categories = {"1": "Breakfast", "2": "Lunch", "3": "Dinner", "4": "Starters"}
+                    item["category"] = categories[cat_choice]
+
                 self.save_menu()
                 print(Fore.GREEN + "Item updated successfully!\n")
                 return
-        print(Fore.RED + "1Item not found!\n")
+        print(Fore.RED + "Item not found!\n")
+
 
     def delete_item(self):
-        """Delete an item by item code"""
         item_code = int(input("Enter the Item Code to delete: "))
         for item in self.MenuList:
             if item["itemcode"] == item_code:
@@ -88,44 +110,33 @@ class RestrauntMenu:
                 self.save_menu()
                 print(Fore.GREEN + "Item deleted successfully!\n")
                 return
-        print(Fore.RED + " Item not found!\n")
+        print(Fore.RED + "Item not found!\n")
+
 
     def show_menu(self):
-        """Show all items in a colorful format"""
         if not self.MenuList:
             print(Fore.RED + "No items available in the menu!")
             return
 
-        print(Fore.RED + Style.BRIGHT + "\n|         🍽️  WELCOME TO ELEVEN : 11 RESTAURANT  🍽️         |")
-        print(Fore.MAGENTA + "-" * 59)
-        print(Fore.YELLOW + Style.BRIGHT + f"| {'Item No.':<10}{'Item Name':<25}{'Half (₹)':<10}{'Full (₹)':<10} |")
-        print(Fore.MAGENTA + "-" * 59)
+        print(Fore.MAGENTA + " " +"-" * 54)
+        print(Fore.RED + Style.BRIGHT + "|        🍽️  WELCOME TO ELEVEN : 11 RESTAURANT  🍽️       |")
+        print(Fore.MAGENTA +" " + "-" * 54)
 
-        for item in self.MenuList:
-            name = item["name"]
-            if "Paneer" in name:
-                color = Fore.LIGHTGREEN_EX
-            elif any(x in name for x in ["Dal", "Rajma", "Kadi"]):
-                color = Fore.LIGHTYELLOW_EX
-            elif "Paratha" in name:
-                color = Fore.CYAN
-            else:
-                color = Fore.LIGHTWHITE_EX
-
-            print(
-                Fore.LIGHTMAGENTA_EX + f"| {item['itemcode']:<10}" +
-                color + f"{item['name']:<25}" +
-                Fore.LIGHTGREEN_EX + f"{item['half']:<10}" +
-                Fore.LIGHTRED_EX + f"{item['full']:<10} |"
-            )
-            time.sleep(0.03)
-
-        print(Fore.MAGENTA + "-" * 59)
-        print(Fore.CYAN + Style.BRIGHT + "Chef's Special: Try our signature Paneer Lababdaar & Veg Biryani!")
+        categories = ["Breakfast", "Lunch", "Dinner", "Starters"]
+        for cat in categories:
+            print(Fore.CYAN + f"\n                   --- {cat.upper()} ---")
+            print(Fore.YELLOW + f"{'Item No.':<10}{'Name':<25}{'Half(₹)':<10}{'Full(₹)':<10}")
+            print(Fore.MAGENTA + "-" * 55)
+            for item in self.MenuList:
+                if item["category"].lower() == cat.lower():
+                    print(Fore.LIGHTWHITE_EX + f"{item['itemcode']:<10}{item['name']:<25}{item['half']:<10}{item['full']:<10}")
+            time.sleep(0.1)
         
+        print(Fore.MAGENTA + "-" * 55)
+        print(Fore.CYAN + Style.BRIGHT + "Chef's Special: Try our signature Paneer Lababdaar & Veg Biryani!")    
+
 
     def search_by_price(self):
-        """Search items below a given price"""
         try:
             max_price = float(input("Enter maximum half-plate price: ₹"))
         except ValueError:
@@ -136,75 +147,181 @@ class RestrauntMenu:
         if found:
             print(Fore.CYAN + f"\nItems priced below ₹{max_price}:")
             for i in found:
-                print(f"{i['itemcode']:<10} | {i['name']:<25} | Half ₹{i['half']:<10} | Full ₹{i['full']:<10}")
+                print(Fore.LIGHTYELLOW_EX + f"{i['itemcode']:<10} | {i['name']:<25} | Half ₹{i['half']:<10} | Full ₹{i['full']:<10} | {i['category']}")
         else:
             print(Fore.RED + f"\nNo items found below ₹{max_price}.\n")
+
+
+class OrderSystem:
+    def __init__(self):
+        with open(path, "r") as f:
+            self.menu = json.load(f)
+        self.order_items = []
+        self.total_amount = 0
+
+    def take_order(self):
+        """Allow staff to take an order from the menu"""
+        print(Fore.CYAN + "\n------ TAKE ORDER ------")
+        while True:
+            try:
+                item_code = int(input("Enter Item Code to order (0 to finish): "))
+            except ValueError:
+                print(Fore.RED + "Please enter a valid item code.")
+                continue
+
+            if item_code == 0:
+                break
+
+            # find item
+            item = next((i for i in self.menu if i["itemcode"] == item_code), None)
+            if not item:
+                print(Fore.RED + "Item not found! Please try again.")
+                continue
+
+            print(Fore.YELLOW + f"Selected: {item['name']}")
+            size_choice = input("Half (H) or Full (F): ").strip().upper()
+            if size_choice == "H" and item["half"] != "":
+                price = float(item["half"])
+            elif size_choice == "F" and item["full"] != "":
+                price = float(item["full"])
+            else:
+                print(Fore.RED + "Invalid choice or size not available.")
+                continue
+
+            try:
+                quantity = int(input("Enter Quantity: "))
+            except ValueError:
+                print(Fore.RED + "Please enter a valid quantity.")
+                continue
+
+            total_price = price * quantity
+            self.order_items.append({
+                "name": item["name"],
+                "size": "Half" if size_choice == "H" else "Full",
+                "price": price,
+                "qty": quantity,
+                "total": total_price
+            })
+            self.total_amount += total_price
+
+            print(Fore.GREEN + f"Added {quantity} x {item['name']} ({size_choice}) = ₹{total_price}\n")
+
+        if not self.order_items:
+            print(Fore.YELLOW + "No items ordered.\n")
+        else:
+            print(Fore.GREEN + "Order Taken Successfully!")
+
+    
+
+class Order(OrderSystem):
+    
+
+    def add_item(self, name, size, qty, price):
+        total = qty * price
+        self.order_items.append({
+            "name": name,
+            "size": size,
+            "qty": qty,
+            "price": price,
+            "total": total
+        })
+        self.total_amount += total
+
+    def generate_bill(self):
+        bill_path = r"E:\ELEVEN-11\ELEVEN-11_restraunt\Database\Bills.json"
+        os.makedirs(os.path.dirname(bill_path), exist_ok=True)
+
+        subtotal = self.total_amount
+        gst = round(subtotal * 0.05, 2)
+        net_total = round(subtotal + gst, 2)
+
+        bill_data = {
+            "bill_id": uuid.uuid4().hex[:6].upper(),
+            "date": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "items": self.order_items,
+            "subtotal": subtotal,
+            "gst": gst,
+            "net_total": net_total
+        }
+
+        # load existing bills 
+        if os.path.exists(bill_path):
+            with open(bill_path, "r") as f:
+                try:
+                    bills = json.load(f)
+                except json.JSONDecodeError:
+                    bills = []
+        else:
+            bills = []
+
+        # adding new bill 
+        bills.append(bill_data)
+
+        with open(bill_path, "w") as f:
+            json.dump(bills, f, indent=4)
+
+        print(Fore.YELLOW + f"-"*42)
+        print(Fore.RED + "============== BILL SUMMARY ==============")
+        print(Fore.YELLOW + f"-"*42)
+        print(Fore.GREEN + f"Bill ID: {bill_data['bill_id']}")
+        print(Fore.GREEN + f"Date: {bill_data['date']}")
+        print(Fore.YELLOW + f"-"*42)
+        for item in bill_data["items"]:
+            print(Fore.GREEN + f"{item['name']} ({item['size']}) x{item['qty']} = ₹{item['total']}")
+        print(Fore.YELLOW + f"-"*42)
+        print(Fore.GREEN + f"Subtotal: ₹{subtotal}")
+        print(Fore.GREEN + f"GST (5%): ₹{gst}")
+        print(Fore.GREEN + f"Net Total: ₹{net_total}")
+        print(Fore.YELLOW + f"-"*42)
 
 class AdminDashboard:
     def admin_menu(self):
         menu = RestrauntMenu()
 
         while True:
-            print("\n========= ADMIN DASHBOARD =========")
-            print("1. Add Menu Item")
-            print("2. Update Menu Item")
-            print("3. Delete Menu Item")
-            print("4. View All Menu Items")
-            print("5. Search Item by Price")
-            print("6. Logout")
-            print("===================================")
+            print(Fore.LIGHTCYAN_EX + "\n========= ADMIN DASHBOARD =========")
+            print(Fore.MAGENTA + "1. Add Menu Item")
+            print(Fore.MAGENTA + "2. Update Menu Item")
+            print(Fore.MAGENTA + "3. Delete Menu Item")
+            print(Fore.MAGENTA + "4. View All Menu Items")
+            print(Fore.MAGENTA + "5. Search Item by Price")
+            print(Fore.MAGENTA + "6. Logout")
+            print(Fore.LIGHTCYAN_EX + "===================================")
 
             choice = input("Enter your choice: ")
 
             if choice == '1':
-                try:
-                    menu.add_item()
-                except Exception:
-                    print(Fore.RED + "Some Technical Issue Occurred! Sorry For this Inconvenience.")
-                
+                menu.add_item()
             elif choice == '2':
-                try:
-                    menu.update_item()
-                except Exception:
-                    print(Fore.RED + "Some Technical Issue Occurred! Sorry For this Inconvenience.")
-                
+                menu.update_item()
             elif choice == '3':
-                try:
-                    menu.delete_item()
-                except Exception:
-                    print(Fore.RED + "Some Technical Issue Occurred! Sorry For this Inconvenience.")
-                
+                menu.delete_item()
             elif choice == '4':
-                try:
-                    menu.show_menu()
-                except Exception:
-                    print(Fore.RED + "Some Technical Issue Occurred! Sorry For this Inconvenience.")
-                
+                menu.show_menu()
             elif choice == '5':
-                try:
-                    menu.search_by_price()
-                except Exception:
-                    print(Fore.RED + "Some Technical Issue Occurred! Sorry For this Inconvenience.")
-                
+                menu.search_by_price()
             elif choice == '6':
                 print(Fore.YELLOW + "Logging out...")
                 break
             else:
                 print(Fore.RED + "Invalid choice. Try again.")
-class StaffDashboard:
 
+
+class StaffDashboard:
     def staff_menu(self):
         menu = RestrauntMenu()
+        # takeorder=OrderSystem()
+        generatebill=Order()
         while True:
-            print("\n========= STAFF DASHBOARD =========")
-            print("1. View Menu")
-            print("2. Take Order")
-            print("3. Generate Bill")
-            print("4. Search Item Below Price")
-            print("5. Logout")
-            print("===================================")
+            print(Fore.LIGHTCYAN_EX +"\n========= STAFF DASHBOARD =========")
+            print(Fore.MAGENTA + "1. View Menu")
+            print(Fore.MAGENTA + "2. Take Order")
+            print(Fore.MAGENTA + "3. Generate Bill")
+            print(Fore.MAGENTA + "4. Search Item Below Price")
+            print(Fore.MAGENTA + "5. Logout")
+            print(Fore.LIGHTCYAN_EX + "===================================") 
 
-            choice = input("Enter your choice: ")
+            choice = input(Fore.LIGHTCYAN_EX +"Enter your choice: ")
 
             if choice == '1':
                 try:
@@ -214,13 +331,13 @@ class StaffDashboard:
      
             elif choice == '2':
                 try:
-                    self.order.take_order()
+                    generatebill.take_order()
                 except Exception:
-                    print("Some Technical Issue Occurred! Sorry For this Inconvenience.")
+                    print(Fore.RED +"Some Technical Issue Occurred! Sorry For this Inconvenience.")
             
             elif choice == '3':
                 try:
-                    self.order.generate_bill()
+                    generatebill.generate_bill()
                 except Exception:
                     print(Fore.RED + "Some Technical Issue Occurred! Sorry For this Inconvenience.")
                 

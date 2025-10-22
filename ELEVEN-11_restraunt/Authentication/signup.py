@@ -14,27 +14,29 @@ class SignUp():
         admin_staff_list=[]
         admin_dict={}
         admin_dict["id"]=uuid.uuid4().hex[:5]
-        admin_dict["fname"]=input("Please Enter Your First Name: ")
-        admin_dict["lname"]=input("Please Enter Your Last Name: ")
-        admin_dict["address"]=input("Please Enter Your Current Address: ")
-        admin_dict["contact"]=input("Please Enter Your Contact Number: ")
+        admin_dict["fname"]=input(Fore.LIGHTCYAN_EX +"Please Enter Your First Name: ")
+        admin_dict["lname"]=input(Fore.LIGHTCYAN_EX +"Please Enter Your Last Name: ")
+        admin_dict["address"]=input(Fore.LIGHTCYAN_EX +"Please Enter Your Current Address: ")
+        admin_dict["contact"]=input(Fore.LIGHTCYAN_EX +"Please Enter Your Contact Number: ")
         
         qualification_list=[]
         qualification_dict={}
         admin_dict["qualification"]=qualification_list
-        
-        qualification_dict["highest_qualification"]=input("Enter Your Highest Qualification: ")
-        qualification_dict["passing_year"]=int(input("Enter Passing year: "))
-        for i in range(10):
-            more_qualification=input("Do You Want to Add More Qualifications? \'Yes' or \'No\'\n")
-            if more_qualification=="Yes":
-                qualification_dict[f"qualification_name{i+1}"]=input("Enter Qualification Name: ")
-                qualification_dict[f"passing_year{i+1}"]=input("Enter Qualification Passing Year: ")
-            elif more_qualification == "No":
-                break
-            else:
-                print(Fore.GREEN +"Enter Only \'Yes\' or \'No\'")  
-          
+        try:
+            qualification_dict["highest_qualification"]=input(Fore.LIGHTCYAN_EX +"Enter Your Highest Qualification: ")
+            qualification_dict["passing_year"]=int(input(Fore.LIGHTCYAN_EX +"Enter Passing year: "))
+            for i in range(10):
+                more_qualification=input(Fore.LIGHTCYAN_EX +"Do You Want to Add More Qualifications? \'Yes' or \'No\'\n")
+                if more_qualification=="Yes":
+                    qualification_dict[f"qualification_name{i+1}"]=input(Fore.LIGHTCYAN_EX +"Enter Qualification Name: ")
+                    qualification_dict[f"passing_year{i+1}"]=input(Fore.LIGHTCYAN_EX +"Enter Qualification Passing Year: ")
+                elif more_qualification == "No":
+                    break
+                else:
+                    print(Fore.RED +"Enter Only \'Yes\' or \'No\'")  
+        except Exception:
+            print(Fore.RED +"Some Technical Issue Occured ! Whether You are Leaving it Blank or Something Else")
+            exit()
         qualification_list.append(qualification_dict)
         admin_dict["experience"]=input("Please Enter Your Work Experince: ")
         

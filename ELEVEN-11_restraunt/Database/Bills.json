@@ -1,0 +1,34 @@
+[
+    {
+        "bill_id": "F170F0",
+        "date": "2025-10-22 22:27:51",
+        "items": [
+            {
+                "name": "Aloo Pyaz Paratha",
+                "size": "Half",
+                "price": 70.0,
+                "qty": 32,
+                "total": 2240.0
+            }
+        ],
+        "subtotal": 2240.0,
+        "gst": 112.0,
+        "net_total": 2352.0
+    },
+    {
+        "bill_id": "32AA34",
+        "date": "2025-10-22 22:31:21",
+        "items": [
+            {
+                "name": "Paneer Paratha",
+                "size": "Half",
+                "price": 70.0,
+                "qty": 293,
+                "total": 20510.0
+            }
+        ],
+        "subtotal": 20510.0,
+        "gst": 1025.5,
+        "net_total": 21535.5
+    }
+]

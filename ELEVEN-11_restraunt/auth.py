@@ -16,20 +16,20 @@ class auth_main():
         print(Fore.YELLOW + Style.BRIGHT + "| (+_+)     Welcome To ELEVEN : 11     (*_*) |")
         print(Fore.RED + Style.BRIGHT +" --------------------------------------------")
 
-        ch = choice()
-        ch_output = ch.menu_choice()
+        try:
+            ch = choice()
+            ch_output = ch.menu_choice()
 
-        if ch_output == 1:  # sign up
+            if ch_output == 1:  # sign up
 
-            ob.sign_up_function_staff()
+                ob.sign_up_function_staff()
 
-        elif ch_output == 2:  # sign in
-            SI.SignInFunc()
+            elif ch_output == 2:  # sign in
+                SI.SignInFunc()
 
-        elif ch_output == 3:  # exit
-            print(Fore.YELLOW + Style.BRIGHT + "Thank you for visiting ELEVEN : 11 Restaurant!\n")
-            break
-
-        else:
+            elif ch_output == 3:  # exit
+                print(Fore.YELLOW + Style.BRIGHT + "Thank you for visiting ELEVEN : 11 Restaurant!\n")
+                break
+        except Exception:
             note_validation()
 auth_main()

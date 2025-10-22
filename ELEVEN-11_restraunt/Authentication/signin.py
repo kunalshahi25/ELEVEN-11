@@ -49,6 +49,7 @@ class SignIn:
                 return
 
         elif output == 3:
+            print(Fore.YELLOW + "Exiting... Run Program Again!!!!")
             exit()
         else:
             note_validation()
