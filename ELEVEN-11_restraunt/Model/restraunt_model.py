@@ -277,7 +277,7 @@ class Order(OrderSystem):
 class AdminDashboard:
     def admin_menu(self):
         menu = RestrauntMenu()
-
+        generatebill=Order()
         while True:
             print(Fore.LIGHTCYAN_EX + "\n========= ADMIN DASHBOARD =========")
             print(Fore.MAGENTA + "1. Add Menu Item")
@@ -285,22 +285,49 @@ class AdminDashboard:
             print(Fore.MAGENTA + "3. Delete Menu Item")
             print(Fore.MAGENTA + "4. View All Menu Items")
             print(Fore.MAGENTA + "5. Search Item by Price")
-            print(Fore.MAGENTA + "6. Logout")
+            print(Fore.MAGENTA + "6. Take Order")
+            print(Fore.MAGENTA + "7. Generate Bill")
+            print(Fore.MAGENTA + "8. Logout")
             print(Fore.LIGHTCYAN_EX + "===================================")
 
             choice = input("Enter your choice: ")
 
             if choice == '1':
-                menu.add_item()
+                try:
+                    menu.add_item()
+                except Exception:
+                    print(Fore.RED +"Some Technical Issue Occurred! Sorry For this Inconvenience.")
             elif choice == '2':
-                menu.update_item()
+                try:
+                    menu.update_item()
+                except Exception:
+                    print(Fore.RED +"Some Technical Issue Occurred! Sorry For this Inconvenience.")
             elif choice == '3':
-                menu.delete_item()
+                try:
+                    menu.delete_item()
+                except Exception:
+                    print(Fore.RED +"Some Technical Issue Occurred! Sorry For this Inconvenience.")
             elif choice == '4':
-                menu.show_menu()
+                try:
+                    menu.show_menu()
+                except Exception:
+                    print(Fore.RED +"Some Technical Issue Occurred! Sorry For this Inconvenience.")
             elif choice == '5':
-                menu.search_by_price()
+                try:
+                    menu.search_by_price()    
+                except Exception:
+                    print(Fore.RED +"Some Technical Issue Occurred! Sorry For this Inconvenience.")
             elif choice == '6':
+                try:
+                    generatebill.take_order()
+                except Exception:
+                    print(Fore.RED +"Some Technical Issue Occurred! Sorry For this Inconvenience.")
+            elif choice == '7':
+                try:
+                    generatebill.generate_bill()
+                except Exception:
+                    print(Fore.RED +"Some Technical Issue Occurred! Sorry For this Inconvenience.")
+            elif choice == '8':
                 print(Fore.YELLOW + "Logging out...")
                 break
             else:
