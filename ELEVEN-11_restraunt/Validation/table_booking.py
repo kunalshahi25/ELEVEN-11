@@ -81,13 +81,13 @@ class TableBooking:
             self.bookings.append(booking_data)
             self.save_bookings()
 
-            print(Fore.GREEN + f"\n✅ Table {suitable} booked successfully!")
+            print(Fore.GREEN + f"\nTable {suitable} booked successfully!")
             print(f"Booking ID: {booking_id}")
             print(f"Customer: {name}")
             print(f"From: {start_time.strftime('%H:%M')} To: {end_time.strftime('%H:%M')}")
             print("==============================")
         else:
-            print(Fore.RED + "\n❌ No suitable table available right now.\n")
+            print(Fore.RED + "\nNo suitable table available right now.\n")
 
     # ------------------ View All Bookings ------------------
     def view_bookings(self):
@@ -122,10 +122,10 @@ class TableBooking:
                     b["status"] = "Cancelled"
                     self.save_bookings()
                     found = True
-                    print(Fore.RED + f"\n❌ Booking {cancel_id} has been cancelled successfully.")
+                    print(Fore.RED + f"\nBooking {cancel_id} has been cancelled successfully.")
                     break
                 else:
-                    print(Fore.YELLOW + f"\n⚠️ Booking {cancel_id} is already {b['status']}.")
+                    print(Fore.YELLOW + f"\nBooking {cancel_id} is already {b['status']}.")
                     return
 
         if not found:
