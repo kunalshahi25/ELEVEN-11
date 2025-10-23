@@ -1,4 +1,5 @@
 from colorama import Fore
+
 class choice:
     def menu_choice(self):
         print(Fore.MAGENTA + "1. \'Sign Up\' \n2. \'Sign In\' \n3. \'Exit\'")
@@ -12,4 +13,3 @@ class admin_staff_ask:
 
 def note_validation():
     print("Number not Matched ! Please Enter Correct Option!")
- 

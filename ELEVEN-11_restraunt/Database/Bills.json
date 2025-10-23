@@ -30,5 +30,44 @@
         "subtotal": 20510.0,
         "gst": 1025.5,
         "net_total": 21535.5
+    },
+    {
+        "bill_id": "192180",
+        "date": "2025-10-22 22:50:03",
+        "items": [
+            {
+                "name": "Plain Paratha",
+                "size": "Half",
+                "price": 40.0,
+                "qty": 3,
+                "total": 120.0
+            }
+        ],
+        "subtotal": 120.0,
+        "gst": 6.0,
+        "net_total": 126.0
+    },
+    {
+        "bill_id": "452A37",
+        "date": "2025-10-22 22:55:12",
+        "items": [
+            {
+                "name": "Aloo Pyaz Paratha",
+                "size": "Half",
+                "price": 70.0,
+                "qty": 5,
+                "total": 350.0
+            },
+            {
+                "name": "Kadi Chawal",
+                "size": "Full",
+                "price": 150.0,
+                "qty": 2,
+                "total": 300.0
+            }
+        ],
+        "subtotal": 650.0,
+        "gst": 32.5,
+        "net_total": 682.5
     }
 ]

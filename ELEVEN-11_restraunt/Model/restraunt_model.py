@@ -4,6 +4,7 @@ import json
 import os
 import uuid
 import datetime
+from Validation.table_booking import TableBooking
 
 init(autoreset=True)
 
@@ -261,7 +262,7 @@ class Order(OrderSystem):
             json.dump(bills, f, indent=4)
 
         print(Fore.YELLOW + f"-"*42)
-        print(Fore.RED + "============== BILL SUMMARY ==============")
+        print(Fore.RED + "============== Eleven:11 BILL =============")
         print(Fore.YELLOW + f"-"*42)
         print(Fore.GREEN + f"Bill ID: {bill_data['bill_id']}")
         print(Fore.GREEN + f"Date: {bill_data['date']}")
@@ -273,11 +274,15 @@ class Order(OrderSystem):
         print(Fore.GREEN + f"GST (5%): ₹{gst}")
         print(Fore.GREEN + f"Net Total: ₹{net_total}")
         print(Fore.YELLOW + f"-"*42)
+        print(Fore.YELLOW + "Thank You For Visiting Eleven:11  (*_*)  Visit Again..")
+        print(Fore.YELLOW + f"-"*42)
+        
 
 class AdminDashboard:
     def admin_menu(self):
         menu = RestrauntMenu()
         generatebill=Order()
+        booking = TableBooking()
         while True:
             print(Fore.LIGHTCYAN_EX + "\n========= ADMIN DASHBOARD =========")
             print(Fore.MAGENTA + "1. Add Menu Item")
@@ -287,7 +292,8 @@ class AdminDashboard:
             print(Fore.MAGENTA + "5. Search Item by Price")
             print(Fore.MAGENTA + "6. Take Order")
             print(Fore.MAGENTA + "7. Generate Bill")
-            print(Fore.MAGENTA + "8. Logout")
+            print(Fore.MAGENTA + "8. Table Booking")
+            print(Fore.MAGENTA + "9. Logout")
             print(Fore.LIGHTCYAN_EX + "===================================")
 
             choice = input("Enter your choice: ")
@@ -328,6 +334,30 @@ class AdminDashboard:
                 except Exception:
                     print(Fore.RED +"Some Technical Issue Occurred! Sorry For this Inconvenience.")
             elif choice == '8':
+                while(True):
+                    print(Fore.CYAN + "\n--- TABLE BOOKING ---")
+                    print(Fore.BLUE + "1. View Available Tables")
+                    print(Fore.BLUE + "2. Book a Table")
+                    print(Fore.BLUE + "3. View Bookings")
+                    print(Fore.BLUE + "4. Exit")
+                    sub = input(Fore.CYAN + "Enter choice: ")
+                    try:
+                        if sub == '1':
+                            booking.show_available_tables()
+                        elif sub == '2':
+                            booking.book_table()
+                        elif sub == '3':
+                            booking.view_bookings()
+                        elif sub == '4':
+                            booking.cancel_booking()
+                        elif sub == '5':
+                            break
+                        else:
+                            print("Invalid choice.")
+                    except Exception:
+                        print(Fore.RED +"Some Technical Issue Occurred! Sorry For this Inconvenience.")
+            
+            elif choice == '9':
                 print(Fore.YELLOW + "Logging out...")
                 break
             else:
@@ -339,13 +369,15 @@ class StaffDashboard:
         menu = RestrauntMenu()
         # takeorder=OrderSystem()
         generatebill=Order()
+        booking = TableBooking()
         while True:
             print(Fore.LIGHTCYAN_EX +"\n========= STAFF DASHBOARD =========")
             print(Fore.MAGENTA + "1. View Menu")
             print(Fore.MAGENTA + "2. Take Order")
             print(Fore.MAGENTA + "3. Generate Bill")
             print(Fore.MAGENTA + "4. Search Item Below Price")
-            print(Fore.MAGENTA + "5. Logout")
+            print(Fore.MAGENTA + "5. Table Booking")
+            print(Fore.MAGENTA + "6. Logout")
             print(Fore.LIGHTCYAN_EX + "===================================") 
 
             choice = input(Fore.LIGHTCYAN_EX +"Enter your choice: ")
@@ -373,8 +405,25 @@ class StaffDashboard:
                     menu.search_by_price()
                 except Exception:
                     print(Fore.RED + "Some Technical Issue Occurred! Sorry For this Inconvenience.")
-                
             elif choice == '5':
+                print(Fore.CYAN + "\n--- TABLE BOOKING ---")
+                print(Fore.BLUE + "1. View Available Tables")
+                print(Fore.BLUE + "2. Book a Table")
+                print(Fore.BLUE + "3. View Bookings")
+                sub = input(Fore.CYAN + "Enter choice: ")
+                try:
+                    if sub == '1':
+                        booking.show_available_tables()
+                    elif sub == '2':
+                        booking.book_table()
+                    elif sub == '3':
+                        booking.view_bookings()
+                    else:
+                        print("Invalid choice.")
+                except Exception:
+                    print(Fore.RED +"Some Technical Issue Occurred! Sorry For this Inconvenience.")
+                
+            elif choice == '6':
                 print(Fore.YELLOW + "Logging out...")
                 break
             else:
