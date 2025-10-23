@@ -1,0 +1,11 @@
+[
+    {
+        "booking_id": "4C67A",
+        "customer_name": "kunal",
+        "table_id": "T1",
+        "people": 2,
+        "start_time": "2025-10-23 09:43",
+        "end_time": "2025-10-23 20:43",
+        "status": "Booked"
+    }
+]
