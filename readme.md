@@ -20,5 +20,8 @@ menu - done
                    |-update          |-take order
                    |-delete          |-generate bill
                    |-view            |-search
-                   |-search          |-logout
+                   |-search          |-table booking
+                   |-take order      |-logout
+                   |-generate bill
+                   |-table booking
                    |-logout
