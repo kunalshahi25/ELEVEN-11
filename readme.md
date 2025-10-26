@@ -1,7 +1,4 @@
-Authentication
-sign up - done
-sign in - done
-menu - done
+
 
                                     main
                                      |
