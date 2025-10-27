@@ -6,7 +6,7 @@ from Authentication.signup import SignUp
 from Model.restraunt_model import AdminDashboard
 from Model.restraunt_model import StaffDashboard
 
-path = r"E:\ELEVEN-11\ELEVEN-11_restraunt\Database\UserAuth.json"
+path = r"E:\ELEVEN-11\Database\UserAuth.json"
 sign_up = SignUp()
 
 class SignIn:

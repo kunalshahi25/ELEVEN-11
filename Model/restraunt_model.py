@@ -8,7 +8,7 @@ from Validation.table_booking import TableBooking
 
 init(autoreset=True)
 
-path = r"E:\ELEVEN-11\ELEVEN-11_restraunt\Database\Menu.json"
+path = r"E:\ELEVEN-11\Database\Menu.json"
 
 
 class RestrauntMenu:
@@ -229,7 +229,7 @@ class Order(OrderSystem):
         self.total_amount += total
 
     def generate_bill(self):
-        bill_path = r"E:\ELEVEN-11\ELEVEN-11_restraunt\Database\Bills.json"
+        bill_path = r"E:\ELEVEN-11\Database\Bills.json"
         os.makedirs(os.path.dirname(bill_path), exist_ok=True)
 
         subtotal = self.total_amount

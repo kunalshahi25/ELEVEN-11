@@ -3,7 +3,7 @@ import uuid
 from datetime import datetime, timedelta
 from colorama import Fore
 
-path = r"E:\ELEVEN-11\ELEVEN-11_restraunt\Database\TableBooking.json"
+path = r"E:\ELEVEN-11\Database\TableBooking.json"
 
 class TableBooking:
     def __init__(self):
