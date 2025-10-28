@@ -5,6 +5,7 @@ import os
 import uuid
 import datetime
 from Validation.table_booking import TableBooking
+from report_section import ReportSection
 
 init(autoreset=True)
 
@@ -297,20 +298,22 @@ class Order(OrderSystem):
 
 class AdminDashboard:
     def admin_menu(self):
+        report=ReportSection()
         menu = RestrauntMenu()
         generatebill=Order()
         booking = TableBooking()
         while True:
             print(Fore.LIGHTCYAN_EX + "\n========= ADMIN DASHBOARD =========")
-            print(Fore.MAGENTA + "1. Add Menu Item")
-            print(Fore.MAGENTA + "2. Update Menu Item")
-            print(Fore.MAGENTA + "3. Delete Menu Item")
-            print(Fore.MAGENTA + "4. View All Menu Items")
-            print(Fore.MAGENTA + "5. Search Item by Price")
-            print(Fore.MAGENTA + "6. Take Order")
-            print(Fore.MAGENTA + "7. Generate Bill")
-            print(Fore.MAGENTA + "8. Table Booking")
-            print(Fore.MAGENTA + "9. Logout")
+            print(Fore.MAGENTA + "1.  Add Menu Item")
+            print(Fore.MAGENTA + "2.  Update Menu Item")
+            print(Fore.MAGENTA + "3.  Delete Menu Item")
+            print(Fore.MAGENTA + "4.  View All Menu Items")
+            print(Fore.MAGENTA + "5.  Search Item by Price")
+            print(Fore.MAGENTA + "6.  Take Order")
+            print(Fore.MAGENTA + "7.  Generate Bill")
+            print(Fore.MAGENTA + "8.  Table Booking")
+            print(Fore.MAGENTA + "9.  Report")
+            print(Fore.MAGENTA + "10. Logout")
             print(Fore.LIGHTCYAN_EX + "===================================")
 
             choice = input("Enter your choice: ")
@@ -375,6 +378,9 @@ class AdminDashboard:
                         print(Fore.RED +"Some Technical Issue Occurred! Sorry For this Inconvenience.")
             
             elif choice == '9':
+                report.show_report()
+                
+            elif choice == '10':
                 print(Fore.YELLOW + "Logging out...")
                 break
             else:
