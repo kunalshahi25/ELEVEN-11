@@ -35,29 +35,45 @@ class RestrauntMenu:
             {"itemcode": 13, "name": "Paneer Do Pyaza", "half": 80, "full": 150, "category": "Dinner"},
             {"itemcode": 14, "name": "Egg Curry", "half": 80, "full": 150, "category": "Dinner"},
             {"itemcode": 15, "name": "Chaap", "half": 80, "full": 150, "category": "Dinner"},
+            {"itemcode": 16, "name": "Kadhai Chicken", "half": 200, "full": 400, "category": "Dinner"},
+            {"itemcode": 17, "name": "Butter Chicken", "half": 210, "full": 420, "category": "Dinner"},
 
             # Starters
-            {"itemcode": 16, "name": "White Sauce Pasta", "half": 100, "full": 190, "category": "Starters"},
-            {"itemcode": 17, "name": "Red Sauce Pasta", "half": 100, "full": 190, "category": "Starters"},
-            {"itemcode": 18, "name": "Mix Sauce Pasta", "half": 100, "full": 190, "category": "Starters"},
+            {"itemcode": 18, "name": "White Sauce Pasta", "half": 100, "full": 190, "category": "Starters"},
+            {"itemcode": 19, "name": "Red Sauce Pasta", "half": 100, "full": 190, "category": "Starters"},
+            {"itemcode": 20, "name": "Mix Sauce Pasta", "half": 100, "full": 190, "category": "Starters"},
+            {"itemcode": 21, "name": "11:11 Special Chicken", "half": 150, "full": 300, "category": "Starters"},
+            
+            #thali
+            {"itemcode": 22, "name": "Veg Thali", "half": 100, "full": "", "category": "Thali"},
+            {"itemcode": 23, "name": "Paneer Thali", "half": 120, "full": "", "category": "Thali"},
+            {"itemcode": 24, "name": "Paneer Thali + Coke", "half": 140, "full": "", "category": "Thali"},
+            {"itemcode": 25, "name": "Chicken Thali", "half": 150, "full": "", "category": "Thali"},
+            {"itemcode": 26, "name": "Chicken Thali + Coke", "half": 170, "full": "", "category": "Thali"},
+            {"itemcode": 27, "name": "Mutton Thali", "half": 200, "full": "", "category": "Thali"},
+            {"itemcode": 28, "name": "Mutton Thali + Coke", "half": 220, "full": "", "category": "Thali"},
         ]
 
+        
+        
         try:
             with open(path, "r") as file:
                 content = file.read().strip()
                 if content:
                     self.MenuList = json.loads(content)
+
                 else:
                     self.MenuList = self.NewMenuList
                     self.save_menu()
                     
-        except FileNotFoundError:
+        except (FileNotFoundError, json.JSONDecodeError):
             self.MenuList = self.NewMenuList
             self.save_menu()
 
+
     def save_menu(self):
         """Save updated menu to JSON file"""
-        with open(path, "w") as file:
+        with open(self.path, "w") as file:
             json.dump(self.MenuList, file, indent=4)
 
 
@@ -70,9 +86,9 @@ class RestrauntMenu:
         add_item_dict["full"] = int(full_price) if full_price else ""
 
         print("\nSelect Category:")
-        print("1. Breakfast\n2. Lunch\n3. Dinner\n4. Starters")
+        print("1. Breakfast\n2. Lunch\n3. Dinner\n4. Starters\n5. Thali")
         cat_choice = input("Enter choice: ")
-        categories = {"1": "Breakfast", "2": "Lunch", "3": "Dinner", "4": "Starters"}
+        categories = {"1": "Breakfast", "2": "Lunch", "3": "Dinner", "4": "Starters", "5": "Thali"}
         add_item_dict["category"] = categories.get(cat_choice, "Lunch")
 
         self.MenuList.append(add_item_dict)
@@ -91,10 +107,10 @@ class RestrauntMenu:
                 item["full"] = int(full_val) if full_val else item["full"]
 
                 print("\nSelect New Category (press Enter to skip):")
-                print("1. Breakfast\n2. Lunch\n3. Dinner\n4. Starters")
+                print("1. Breakfast\n2. Lunch\n3. Dinner\n4. Starters\n5. Thali")
                 cat_choice = input("Enter choice: ")
-                if cat_choice in ["1", "2", "3", "4"]:
-                    categories = {"1": "Breakfast", "2": "Lunch", "3": "Dinner", "4": "Starters"}
+                if cat_choice in ["1", "2", "3", "4", "5"]:
+                    categories = {"1": "Breakfast", "2": "Lunch", "3": "Dinner", "4": "Starters", "5": "Thali"}
                     item["category"] = categories[cat_choice]
 
                 self.save_menu()
@@ -117,24 +133,25 @@ class RestrauntMenu:
     def show_menu(self):
         if not self.MenuList:
             print(Fore.RED + "No items available in the menu!")
+            self.save_menu()
             return
 
-        print(Fore.MAGENTA + " " +"-" * 54)
-        print(Fore.RED + Style.BRIGHT + "|        🍽️  WELCOME TO ELEVEN : 11 RESTAURANT  🍽️       |")
-        print(Fore.MAGENTA +" " + "-" * 54)
+        print(Fore.MAGENTA + " " +"-" * 60)
+        print(Fore.RED + Style.BRIGHT + "|           🍽️  WELCOME TO ELEVEN : 11 RESTAURANT  🍽️          |")
+        print(Fore.MAGENTA +" " + "-" * 60)
 
-        categories = ["Breakfast", "Lunch", "Dinner", "Starters"]
+        categories = ["Breakfast", "Lunch", "Dinner", "Starters", "Thali"]
         for cat in categories:
             print(Fore.CYAN + f"\n                   --- {cat.upper()} ---")
-            print(Fore.YELLOW + f"{'Item No.':<10}{'Name':<25}{'Half(₹)':<10}{'Full(₹)':<10}")
-            print(Fore.MAGENTA + "-" * 55)
+            print(Fore.YELLOW + f"{'Item No.':<10}{'Name':<35}{'Half(₹)':<10}{'Full(₹)':<10}")
+            print(Fore.MAGENTA + "-" * 62)
             for item in self.MenuList:
                 if item["category"].lower() == cat.lower():
-                    print(Fore.LIGHTWHITE_EX + f"{item['itemcode']:<10}{item['name']:<25}{item['half']:<10}{item['full']:<10}")
+                    print(Fore.LIGHTWHITE_EX + f"{item['itemcode']:<10}{item['name']:<35}{item['half']:<10}{item['full']:<10}")
             time.sleep(0.1)
         
-        print(Fore.MAGENTA + "-" * 55)
-        print(Fore.CYAN + Style.BRIGHT + "Chef's Special: Try our signature Paneer Lababdaar & Veg Biryani!")    
+        print(Fore.MAGENTA + "-" * 62)
+        print(Fore.CYAN + Style.BRIGHT + "Chef's Special: Try our signature Paneer Lababdaar & 11:11 Special Chicken !")    
 
 
     def search_by_price(self):
@@ -148,7 +165,7 @@ class RestrauntMenu:
         if found:
             print(Fore.CYAN + f"\nItems priced below ₹{max_price}:")
             for i in found:
-                print(Fore.LIGHTYELLOW_EX + f"{i['itemcode']:<10} | {i['name']:<25} | Half ₹{i['half']:<10} | Full ₹{i['full']:<10} | {i['category']}")
+                print(Fore.LIGHTYELLOW_EX + f"{i['itemcode']:<10} | {i['name']:<35} | Half ₹{i['half']:<10} | Full ₹{i['full']:<10} | {i['category']}")
         else:
             print(Fore.RED + f"\nNo items found below ₹{max_price}.\n")
 

@@ -1,135 +1,37 @@
 [
-    {
-        "itemcode": 1,
-        "name": "Aloo Paratha",
-        "half": 50,
-        "full": "",
-        "category": "Breakfast"
-    },
-    {
-        "itemcode": 2,
-        "name": "Paneer Paratha",
-        "half": 70,
-        "full": "",
-        "category": "Breakfast"
-    },
-    {
-        "itemcode": 3,
-        "name": "Plain Paratha",
-        "half": 40,
-        "full": "",
-        "category": "Breakfast"
-    },
-    {
-        "itemcode": 4,
-        "name": "Aloo Pyaz Paratha",
-        "half": 70,
-        "full": "",
-        "category": "Breakfast"
-    },
-    {
-        "itemcode": 6,
-        "name": "Dal Makhani",
-        "half": 80,
-        "full": 150,
-        "category": "Lunch"
-    },
-    {
-        "itemcode": 7,
-        "name": "Rajma Chawal",
-        "half": 80,
-        "full": 150,
-        "category": "Lunch"
-    },
-    {
-        "itemcode": 8,
-        "name": "Kadi Chawal",
-        "half": 80,
-        "full": 150,
-        "category": "Lunch"
-    },
-    {
-        "itemcode": 9,
-        "name": "Mix Veg",
-        "half": 90,
-        "full": 170,
-        "category": "Lunch"
-    },
-    {
-        "itemcode": 11,
-        "name": "Paneer Lababdaar",
-        "half": 90,
-        "full": 170,
-        "category": "Dinner"
-    },
-    {
-        "itemcode": 12,
-        "name": "Butter Paneer",
-        "half": 80,
-        "full": 150,
-        "category": "Dinner"
-    },
-    {
-        "itemcode": 13,
-        "name": "Paneer Do Pyaza",
-        "half": 80,
-        "full": 150,
-        "category": "Dinner"
-    },
-    {
-        "itemcode": 14,
-        "name": "Egg Curry",
-        "half": 80,
-        "full": 150,
-        "category": "Dinner"
-    },
-    {
-        "itemcode": 15,
-        "name": "Chaap Fry",
-        "half": 150,
-        "full": 250,
-        "category": "Dinner"
-    },
-    {
-        "itemcode": 16,
-        "name": "White Sauce Pasta",
-        "half": 100,
-        "full": 190,
-        "category": "Starters"
-    },
-    {
-        "itemcode": 17,
-        "name": "Red Sauce Pasta",
-        "half": 100,
-        "full": 190,
-        "category": "Starters"
-    },
-    {
-        "itemcode": 18,
-        "name": "Mix Sauce Pasta",
-        "half": 100,
-        "full": 190,
-        "category": "Starters"
-    },
-    {
-        "itemcode": 19,
-        "name": "Chicken Lollipop",
-        "half": 150,
-        "full": 300,
-        "category": "Starters"
-    },
-    {
-        "itemcode": 5,
-        "name": "Dal Fry",
-        "half": 70,
-        "full": 140,
-        "category": "Lunch"
-    },
-    {
-        "itemcode": 10,
-        "name": "Aloo Jeera",
-        "half": 60,
-        "full": 120,
-        "category": "Lunch"
-    }
+            {"itemcode": 1, "name": "Aloo Paratha", "half": 50, "full": "", "category": "Breakfast"},
+            {"itemcode": 2, "name": "Paneer Paratha", "half": 70, "full": "", "category": "Breakfast"},
+            {"itemcode": 3, "name": "Plain Paratha", "half": 40, "full": "", "category": "Breakfast"},
+            {"itemcode": 4, "name": "Aloo Pyaz Paratha", "half": 70, "full": "", "category": "Breakfast"},
+
+
+            {"itemcode": 5, "name": "Dal Fry", "half": 70, "full": 140, "category": "Lunch"},
+            {"itemcode": 6, "name": "Dal Makhani", "half": 80, "full": 150, "category": "Lunch"},
+            {"itemcode": 7, "name": "Rajma Chawal", "half": 80, "full": 150, "category": "Lunch"},
+            {"itemcode": 8, "name": "Kadi Chawal", "half": 80, "full": 150, "category": "Lunch"},
+            {"itemcode": 9, "name": "Mix Veg", "half": 90, "full": 170, "category": "Lunch"},
+            {"itemcode": 10, "name": "Aalo Jeera", "half": 60, "full": 120, "category": "Lunch"},
+
+
+            {"itemcode": 11, "name": "Paneer Lababdaar", "half": 90, "full": 170, "category": "Dinner"},
+            {"itemcode": 12, "name": "Butter Paneer", "half": 80, "full": 150, "category": "Dinner"},
+            {"itemcode": 13, "name": "Paneer Do Pyaza", "half": 80, "full": 150, "category": "Dinner"},
+            {"itemcode": 14, "name": "Egg Curry", "half": 80, "full": 150, "category": "Dinner"},
+            {"itemcode": 15, "name": "Chaap", "half": 80, "full": 150, "category": "Dinner"},
+            {"itemcode": 16, "name": "Kadhai Chicken", "half": 200, "full": 400, "category": "Dinner"},
+            {"itemcode": 17, "name": "Butter Chicken", "half": 210, "full": 420, "category": "Dinner"},
+
+
+            {"itemcode": 18, "name": "White Sauce Pasta", "half": 100, "full": 190, "category": "Starters"},
+            {"itemcode": 19, "name": "Red Sauce Pasta", "half": 100, "full": 190, "category": "Starters"},
+            {"itemcode": 20, "name": "Mix Sauce Pasta", "half": 100, "full": 190, "category": "Starters"},
+            {"itemcode": 21, "name": "11:11 Special Chicken", "half": 150, "full": 300, "category": "Starters"},
+            
+            {"itemcode": 22, "name": "Veg Thali", "half": 100, "full": "", "category": "Thali"},
+            {"itemcode": 23, "name": "Paneer Thali", "half": 120, "full": "", "category": "Thali"},
+            {"itemcode": 24, "name": "Paneer Thali + Coke", "half": 140, "full": "", "category": "Thali"},
+            {"itemcode": 25, "name": "Chicken Thali", "half": 150, "full": "", "category": "Thali"},
+            {"itemcode": 26, "name": "Chicken Thali + Coke", "half": 170, "full": "", "category": "Thali"},
+            {"itemcode": 27, "name": "Mutton Thali", "half": 200, "full": "", "category": "Thali"},
+            {"itemcode": 28, "name": "Mutton Thali + Coke", "half": 220, "full": "", "category": "Thali"}
 ]
