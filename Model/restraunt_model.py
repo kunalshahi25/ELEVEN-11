@@ -5,7 +5,7 @@ import os
 import uuid
 import datetime
 from Validation.table_booking import TableBooking
-from report_section import ReportSection
+from Model.report_section import ReportSection
 
 init(autoreset=True)
 
@@ -358,8 +358,9 @@ class AdminDashboard:
                     print(Fore.CYAN + "\n--- TABLE BOOKING ---")
                     print(Fore.BLUE + "1. View Available Tables")
                     print(Fore.BLUE + "2. Book a Table")
-                    print(Fore.BLUE + "3. View Bookings")
-                    print(Fore.BLUE + "4. Exit")
+                    print(Fore.BLUE + "3. Cancel Bookings")
+                    print(Fore.BLUE + "4. View Bookings")
+                    print(Fore.BLUE + "5. Exit")
                     sub = input(Fore.CYAN + "Enter choice: ")
                     try:
                         if sub == '1':
@@ -367,9 +368,9 @@ class AdminDashboard:
                         elif sub == '2':
                             booking.book_table()
                         elif sub == '3':
-                            booking.view_bookings()
-                        elif sub == '4':
                             booking.cancel_booking()
+                        elif sub == '4':
+                            booking.view_bookings()
                         elif sub == '5':
                             break
                         else:
@@ -378,7 +379,11 @@ class AdminDashboard:
                         print(Fore.RED +"Some Technical Issue Occurred! Sorry For this Inconvenience.")
             
             elif choice == '9':
-                report.show_report()
+                try:
+                    report.show_report()
+                    
+                except Exception:
+                    print(Fore.RED +"Some Technical Issue Occurred! Sorry For this Inconvenience.")
                 
             elif choice == '10':
                 print(Fore.YELLOW + "Logging out...")

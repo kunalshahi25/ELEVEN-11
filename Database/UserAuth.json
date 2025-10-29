@@ -1,1 +1,23 @@
-[{"admin": [{"id": "6b069", "fname": "kunal", "lname": "shahi", "address": "ason", "contact": "839954783", "email": "kunal@123.com", "qualification": [{"highest_qualification": "12th", "passing_year": 2024}], "experience": "2", "username": "kunal123", "password": "kunal@123"}]}]
+[
+    {
+        "staff": [
+            {
+                "id": "68285",
+                "fname": "ruchita",
+                "lname": "",
+                "address": "gurgaon",
+                "contact": "93884922",
+                "email": "r@123.com",
+                "qualification": [
+                    {
+                        "highest_qualification": "12",
+                        "passing_year": 2024
+                    }
+                ],
+                "experience": "0",
+                "username": "ruchita123",
+                "password": "ruchita@123"
+            }
+        ]
+    }
+]

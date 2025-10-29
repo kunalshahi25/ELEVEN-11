@@ -26,24 +26,27 @@ class SignUp():
                 print(Fore.RED + "Password cannot be blank. Please enter a value.")
                 
     def sign_up_function_staff(self):
-        special_chars = ['!', '@', '#', '&', '*', '(',')', '-', '_', '=', '+', '?', '[', ']']
-
-        has_special = False
-        has_zero = False
         
         admin_staff_dict={}
         admin_staff_list=[]
         admin_dict={}
         admin_dict["id"]=uuid.uuid4().hex[:5]
-        admin_dict["fname"] = self.get_required_input(Fore.LIGHTCYAN_EX + "Please Enter Your First Name: ")
-        admin_dict["lname"] = self.get_required_input(Fore.LIGHTCYAN_EX + "Please Enter Your Last Name: ")
-        admin_dict["address"] = self.get_required_input(Fore.LIGHTCYAN_EX + "Please Enter Your Current Address: ")
-        admin_dict["contact"] = self.get_required_input(Fore.LIGHTCYAN_EX + "Please Enter Your Contact Number: ")
-        email = self.get_required_input(Fore.LIGHTCYAN_EX + "Please Enter Your Email: ")
+        admin_dict["fname"] = self.get_required_input("Please Enter Your First Name: ")
+        admin_dict["lname"] = input("Please Enter Your Last Name: ")
+        admin_dict["address"] = self.get_required_input("Please Enter Your Current Address: ")
+        admin_dict["contact"] = self.get_required_input("Please Enter Your Contact Number: ")
+        email = self.get_required_input("Please Enter Your Email: ")
         
         if "@" not in email or ".com" not in email:
             print(Fore.RED + "Invalid email format.")
-            exit()
+            for i in range(3):
+                print(Fore.RED + f"You Have {3-i} Attempts left..")
+                email = self.get_required_input("Please Enter Your Email: ")
+                if "@" not in email or ".com" not in email:
+                    print(Fore.RED + "Invalid email format.")
+                else:
+                    break
+            
         admin_dict["email"] = email
         
         qualification_list=[]
@@ -65,36 +68,13 @@ class SignUp():
         qualification_list.append(qualification_dict)
         admin_dict["experience"]=self.get_required_input("Please Enter Your Work Experince: ")
         
-        username=input("Please Enter Username: ")
-        for i in username:
-            if i == '0':
-                print("Username should Not contain Zero.")
-                exit()
+        #username function
+        username = self.username_validation()
         admin_dict["username"]=username
 
-        password = self.get_required_password("Please Enter Password: ")
-        confirm_password = self.get_required_password("Confirm Password: ")
+        password = self.password_validation()
+        admin_dict["password"]=password
 
-        for ch in password:
-            if ch == '0':
-                has_zero = True
-            if ch in special_chars:
-                has_special = True
-
-        if has_zero or len(password) < 8:
-            print("Invalid password: should not contain '0' and should not be less than 8 characters.")
-            exit()
-        elif not has_special:
-            print("Invalid password: must include at least one special character")
-            exit()
-            
-
-        elif password != confirm_password:
-            print("Passwords do not match! Please try again.")
-            return
-        else: 
-            admin_dict["password"]=password
-            print(Fore.GREEN + "Sign up Successfull... ")
         admin_staff_list.append(admin_dict)
         admin_staff_dict["staff"] =admin_staff_list
         with open(path, "r") as file:
@@ -104,5 +84,68 @@ class SignUp():
             else:
                 signup_data_list = []
         signup_data_list.append(admin_staff_dict)
-        with open(path,'w') as file:
-            file.write(json.dumps(signup_data_list))
+        with open(path, 'w') as file:
+            json.dump(signup_data_list, file, indent=4)
+
+            
+    def username_validation(self):
+        username=self.get_required_input("Please Enter Username: ")
+        
+        for attempt in range(3):
+
+            if username.startswith("0"):
+                print(Fore.RED + "Username should NOT start with '0'.")
+                print(Fore.RED + f"You have {3 - attempt} attempts left.")
+                username = self.get_required_input("Please Enter Username: ")
+                continue
+
+            if username.count("0") > 2:
+                print(Fore.RED + "Username can contain a maximum of 2 zeros.")
+                print(Fore.RED + f"You have {3 - attempt} attempts left.")
+                username = self.get_required_input("Please Enter Username: ")
+                continue
+            break #if all validation are correct than break
+        
+        else:
+            print(Fore.RED + "Too many invalid attempts! Exiting...")
+            exit()
+        return username
+    
+    def password_validation(self):
+        special_chars = ['!', '@', '#', '&', '*', '(', ')', '-', '_', '=', '+', '?', '[', ']']
+
+        for attempt in range(3):
+            password = self.get_required_password("Please Enter Password: ")
+            confirm_password = self.get_required_password("Confirm Password: ")
+
+            has_zero = '0' in password
+            has_special = any(ch in special_chars for ch in password)
+
+            if has_zero:
+                print(Fore.RED + "Invalid password: should NOT contain '0'.")
+                print(Fore.RED + f"You have {2 - attempt} attempts left.\n")
+                continue
+            
+            if len(password) < 8:
+                print(Fore.RED + "Invalid password: must be at least 8 characters long.")
+                print(Fore.RED + f"You have {2 - attempt} attempts left.\n")
+                continue
+            
+            if not has_special:
+                print(Fore.RED + "Invalid password: must include at least one special character.")
+                print(Fore.RED + f"You have {2 - attempt} attempts left.\n")
+                continue
+            
+            if password != confirm_password:
+                print(Fore.RED + "Passwords do not match!")
+                print(Fore.RED + f"You have {2 - attempt} attempts left.\n")
+                continue
+
+            print(Fore.GREEN + "Sign up Successful..")
+            break
+            
+        else:
+            print("Too many invalid attempts. Exiting...")
+            exit()
+        return password
+    
