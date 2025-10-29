@@ -15,6 +15,16 @@
         "people": 4,
         "start_time": "2025-10-28 14:11",
         "end_time": "2025-10-29 10:11",
-        "status": "Booked"
+        "status": "Expired"
+    },
+    {
+        "booking_id": "82D5C",
+        "customer_name": "kunal",
+        "table_id": "T7",
+        "people": 5,
+        "date": "2025-10-29",
+        "start_time": "2025-10-29 11:30",
+        "end_time": "2025-10-29 12:30",
+        "status": "Expired"
     }
 ]

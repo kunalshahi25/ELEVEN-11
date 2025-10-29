@@ -69,5 +69,37 @@
         "subtotal": 650.0,
         "gst": 32.5,
         "net_total": 682.5
+    },
+    {
+        "bill_id": "56201E",
+        "date": "2025-10-29 14:05:25",
+        "items": [],
+        "subtotal": 0,
+        "gst": 0.0,
+        "net_total": 0.0
+    },
+    {
+        "bill_id": "C7D0D8",
+        "date": "2025-10-29 14:05:34",
+        "items": [],
+        "subtotal": 0,
+        "gst": 0.0,
+        "net_total": 0.0
+    },
+    {
+        "bill_id": "65928C",
+        "date": "2025-10-29 14:06:07",
+        "items": [
+            {
+                "name": "Paneer Thali",
+                "size": "Half",
+                "price": 120.0,
+                "qty": 5,
+                "total": 600.0
+            }
+        ],
+        "subtotal": 600.0,
+        "gst": 30.0,
+        "net_total": 630.0
     }
 ]

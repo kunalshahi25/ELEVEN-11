@@ -5,7 +5,7 @@ import os
 import uuid
 import datetime
 from Validation.table_booking import TableBooking
-from Model.report_section import ReportSection
+from Domain.report_section import ReportSection
 
 init(autoreset=True)
 
@@ -17,10 +17,10 @@ class RestrauntMenu:
         # Default categorized menu
         self.NewMenuList = [
             # Breakfast
-            {"itemcode": 1, "name": "Aloo Paratha", "half": 50, "full": "", "category": "Breakfast"},
-            {"itemcode": 2, "name": "Paneer Paratha", "half": 70, "full": "", "category": "Breakfast"},
-            {"itemcode": 3, "name": "Plain Paratha", "half": 40, "full": "", "category": "Breakfast"},
-            {"itemcode": 4, "name": "Aloo Pyaz Paratha", "half": 70, "full": "", "category": "Breakfast"},
+            {"itemcode": 1, "name": "Aloo Paratha(only half)", "half": 50, "full": "", "category": "Breakfast"},
+            {"itemcode": 2, "name": "Paneer Paratha(only half)", "half": 70, "full": "", "category": "Breakfast"},
+            {"itemcode": 3, "name": "Plain Paratha(only half)", "half": 40, "full": "", "category": "Breakfast"},
+            {"itemcode": 4, "name": "Aloo Pyaz Paratha(only half)", "half": 70, "full": "", "category": "Breakfast"},
 
             # Lunch
             {"itemcode": 5, "name": "Dal Fry", "half": 70, "full": 140, "category": "Lunch"},
@@ -46,13 +46,13 @@ class RestrauntMenu:
             {"itemcode": 21, "name": "11:11 Special Chicken", "half": 150, "full": 300, "category": "Starters"},
             
             #thali
-            {"itemcode": 22, "name": "Veg Thali", "half": 100, "full": "", "category": "Thali"},
-            {"itemcode": 23, "name": "Paneer Thali", "half": 120, "full": "", "category": "Thali"},
-            {"itemcode": 24, "name": "Paneer Thali + Coke", "half": 140, "full": "", "category": "Thali"},
-            {"itemcode": 25, "name": "Chicken Thali", "half": 150, "full": "", "category": "Thali"},
-            {"itemcode": 26, "name": "Chicken Thali + Coke", "half": 170, "full": "", "category": "Thali"},
-            {"itemcode": 27, "name": "Mutton Thali", "half": 200, "full": "", "category": "Thali"},
-            {"itemcode": 28, "name": "Mutton Thali + Coke", "half": 220, "full": "", "category": "Thali"},
+            {"itemcode": 22, "name": "Veg Thali(only half)", "half": 100, "full": "", "category": "Thali"},
+            {"itemcode": 23, "name": "Paneer Thali(only half)", "half": 120, "full": "", "category": "Thali"},
+            {"itemcode": 24, "name": "Paneer Thali + Coke(only half)", "half": 140, "full": "", "category": "Thali"},
+            {"itemcode": 25, "name": "Chicken Thali(only half)", "half": 150, "full": "", "category": "Thali"},
+            {"itemcode": 26, "name": "Chicken Thali + Coke(only half)", "half": 170, "full": "", "category": "Thali"},
+            {"itemcode": 27, "name": "Mutton Thali(only half)", "half": 200, "full": "", "category": "Thali"},
+            {"itemcode": 28, "name": "Mutton Thali + Coke(only half)", "half": 220, "full": "", "category": "Thali"},
         ]
 
         
@@ -179,8 +179,11 @@ class OrderSystem:
         self.total_amount = 0
 
     def take_order(self):
+
         """Allow staff to take an order from the menu"""
         print(Fore.CYAN + "\n------ TAKE ORDER ------")
+        max_limit = 20  # max per item
+
         while True:
             try:
                 item_code = int(input("Enter Item Code to order (0 to finish): "))
@@ -207,23 +210,46 @@ class OrderSystem:
                 print(Fore.RED + "Invalid choice or size not available.")
                 continue
 
+            # get quantity
             try:
                 quantity = int(input("Enter Quantity: "))
             except ValueError:
                 print(Fore.RED + "Please enter a valid quantity.")
                 continue
 
-            total_price = price * quantity
-            self.order_items.append({
-                "name": item["name"],
-                "size": "Half" if size_choice == "H" else "Full",
-                "price": price,
-                "qty": quantity,
-                "total": total_price
-            })
-            self.total_amount += total_price
+            # check limit for that particular item
+            if quantity > max_limit:
+                print(Fore.RED + f"You can only order up to {max_limit} plates for this item.")
+                continue
 
-            print(Fore.GREEN + f"Added {quantity} x {item['name']} ({size_choice}) = ₹{total_price}\n")
+            # check if same item (name + size) already in order
+            existing_item = next(
+                (o for o in self.order_items if o["name"] == item["name"] and o["size"] == ("Half" if size_choice == "H" else "Full")),
+                None
+            )
+
+            if existing_item:
+                new_total_qty = existing_item["qty"] + quantity
+                if new_total_qty > max_limit:
+                    allowed = max_limit - existing_item["qty"]
+                    print(Fore.RED + f"You can only add {allowed} more plates for {item['name']} (max {max_limit}).")
+                    continue
+                else:
+                    existing_item["qty"] = new_total_qty
+                    existing_item["total"] = existing_item["price"] * new_total_qty
+                    print(Fore.GREEN + f"Updated {item['name']} ({size_choice}) to {new_total_qty} plates.")
+            else:
+                total_price = price * quantity
+                self.order_items.append({
+                    "name": item["name"],
+                    "size": "Half" if size_choice == "H" else "Full",
+                    "price": price,
+                    "qty": quantity,
+                    "total": total_price
+                })
+                print(Fore.GREEN + f"Added {quantity} x {item['name']} ({size_choice}) = ₹{total_price}")
+
+            self.total_amount = sum(o["total"] for o in self.order_items)
 
         if not self.order_items:
             print(Fore.YELLOW + "No items ordered.\n")

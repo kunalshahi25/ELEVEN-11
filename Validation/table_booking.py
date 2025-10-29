@@ -144,7 +144,7 @@ class TableBooking:
                     b["status"] = "Cancelled"
                     self.save_bookings()
                     found = True
-                    print(Fore.RED + f"\n❌ Booking {cancel_id} has been cancelled successfully.")
+                    print(Fore.RED + f"\nBooking {cancel_id} has been cancelled successfully.")
                     break
                 else:
                     print(Fore.YELLOW + f"\nBooking {cancel_id} is already {b['status']}.")
@@ -171,4 +171,4 @@ class TableBooking:
 
         if updated:
             self.save_bookings()
-            print(Fore.YELLOW + "Old bookings expired automatically.\n")
+            # print(Fore.YELLOW + "Old bookings expired automatically.\n")
